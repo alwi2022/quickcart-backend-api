@@ -12,7 +12,7 @@ export async function GET(_req, { params }) {
   if (!prod) return new Response(JSON.stringify({ message: 'Not found' }), { status: 404 });
 
   // Ambil 10 ulasan terbaru yang published
-  const reviews = await Review.find({ productId: prod._id, status: 'published' })
+  const reviews = await Review.find({ product_id: String(prod._id), status: 'published' })
     .sort('-createdAt')
     .limit(10)
     .lean();

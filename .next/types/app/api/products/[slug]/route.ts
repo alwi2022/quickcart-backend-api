@@ -1,4 +1,4 @@
-// File: C:\Users\imamb\Desktop\QuickCart\apps\backend\app\api\products\[slug]\route.js
+// File: C:\Users\imamb\Desktop\quickchart-project\quickcart-backend-api\app\api\products\[slug]\route.ts
 import * as entry from '../../../../../../app/api/products/[slug]/route.js'
 import type { NextRequest } from 'next/server.js'
 

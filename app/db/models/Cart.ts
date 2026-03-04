@@ -4,11 +4,15 @@ import { Schema, model, models, type Model } from "mongoose";
 
 const CartItemSchema = new Schema(
     {
-        productId: { type: Schema.Types.ObjectId, ref: "Product" },
-        variantId: { type: Schema.Types.ObjectId },
+        // String supaya kompatibel untuk produk legacy maupun ObjectId
+        productId: { type: String, index: true },
+        variantId: { type: String },
         sku: String,
         title: String,
         variantLabel: String,
+        productImage: String,
+        brand: String,
+        category: String,
         qty: { type: Number, default: 1 },
         priceSnapshot: { currency: String, unit: Number },
         addedAt: { type: Date, default: Date.now },

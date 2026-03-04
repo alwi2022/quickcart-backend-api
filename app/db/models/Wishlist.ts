@@ -6,7 +6,8 @@ const WishlistSchema = new Schema(
         userId: { type: Schema.Types.ObjectId, ref: "User", unique: true },
         items: [
             {
-                productId: { type: Schema.Types.ObjectId, ref: "Product" },
+                // String supaya bisa simpan ID produk legacy/non-ObjectId
+                productId: { type: String, index: true },
                 addedAt: { type: Date, default: Date.now },
             },
         ],

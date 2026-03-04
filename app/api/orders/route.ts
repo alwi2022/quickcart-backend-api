@@ -55,7 +55,7 @@ export async function GET(request: Request) {
         .sort({ placedAt: -1 })
         .skip(skip)
         .limit(limit)
-        .select('orderNo status pricing placedAt items payment.shipment')
+        .select('orderNo status pricing placedAt items payment shipment shippingAddress')
         .lean(),
       Order.countDocuments({ userId: user.sub }),
     ]);

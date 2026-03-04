@@ -25,6 +25,8 @@ const UserSchema = new Schema(
         email: { type: String, index: true, unique: true, sparse: true },
         phone: { type: String, index: true, unique: true, sparse: true },
         name: String,
+        gender: String,
+        birthday: String,
         password_hash: String,
         roles: { type: [String], default: ["customer"] },
         status: { type: String, enum: ["active", "blocked", "deleted"], default: "active" },

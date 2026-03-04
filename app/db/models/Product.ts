@@ -1,5 +1,7 @@
 // models/Product.js
-import { Schema, model, models, type Model } from "mongoose";
+import mongoose, { type Model } from "mongoose";
+
+const { Schema } = mongoose;
 
 
 const MediaSchema = new Schema(
@@ -60,7 +62,9 @@ ProductSchema.index({ status: 1 });
 ProductSchema.index({ updatedAt: -1 });
 
 
-const ProductModel = (models.Product || model("Product", ProductSchema)) as Model<Record<string, unknown>>;
+const ProductModel = (mongoose.models.Product || mongoose.model("Product", ProductSchema)) as Model<
+    Record<string, unknown>
+>;
 
 export default ProductModel;
 

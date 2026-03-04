@@ -4,11 +4,15 @@ import { Schema, model, models, type Model } from "mongoose";
 // === Item dalam order (snapshot produk di saat checkout)
 const OrderItemSchema = new Schema(
   {
-    productId: { type: Schema.Types.ObjectId, ref: "Product" },
-    variantId: { type: Schema.Types.ObjectId },
+    // String agar kompatibel lintas sumber produk (legacy/new schema)
+    productId: { type: String },
+    variantId: { type: String },
     sku: String,
     title: String,
     variantLabel: String,
+    productImage: String,
+    brand: String,
+    category: String,
     qty: { type: Number, required: true },
     price: {
       currency: { type: String, default: "IDR" },

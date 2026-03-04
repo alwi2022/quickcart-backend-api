@@ -14,9 +14,10 @@ type RouteContext = {
 };
 
 type ProductDetail = {
-  brand_id?: unknown;
-  category_id?: unknown;
+  brandId?: unknown;
+  categoryIds?: unknown[];
   brand?: unknown;
+  categories?: unknown[];
   category?: unknown;
 } & Record<string, unknown>;
 
@@ -29,13 +30,17 @@ export async function GET(_req: Request, { params }: RouteContext) {
     const product = ((await Product.findById(id).lean()) as unknown) as ProductDetail | null;
     if (!product) throw new NotFoundError('Product not found');
 
-    if (product.brand_id) {
-      const brand = await Brand.findById(product.brand_id).select('name slug').lean();
+    if (product.brandId) {
+      const brand = await Brand.findById(product.brandId).select('name slug').lean();
       product.brand = brand || null;
     }
-    if (product.category_id) {
-      const category = await Category.findById(product.category_id).select('name slug').lean();
-      product.category = category || null;
+
+    if (Array.isArray(product.categoryIds) && product.categoryIds.length > 0) {
+      const categories = await Category.find({ _id: { $in: product.categoryIds } })
+        .select('name slug')
+        .lean();
+      product.categories = categories || [];
+      product.category = categories?.[0] || null;
     }
 
     return json({ item: product });
